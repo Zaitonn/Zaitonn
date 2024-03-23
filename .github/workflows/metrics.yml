@@ -1,0 +1,37 @@
+name: Metrics Generator
+on:
+  push:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions: read-all
+
+jobs:
+  generate:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Metrics embed
+        uses: lowlighter/metrics@v3.34
+        with:
+          filename: docs/metrics.svg
+          token: ${{ github.token }}
+          config_timezone: Asia/Shanghai
+          plugin_lines: true
+          plugin_calendar: true
+          plugin_wakatime: true
+          plugin_wakatime_token: ${{ secrets.WAKATIMETOKEN }}
+          plugin_languages: true
+          plugin_languages_indepth: true
+          plugin_notable: true
+          plugin_notable_repositories: true
+
+      - uses: EndBug/add-and-commit@v9
+        continue-on-error: true
+        with:
+          message: update Metrics
+          author_name: GitHub Actions
+          author_email: 41898282+github-actions[bot]@users.noreply.github.com
