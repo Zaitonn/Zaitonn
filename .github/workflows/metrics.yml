@@ -5,7 +5,8 @@ on:
     - cron: "0 0 * * *"
   workflow_dispatch:
 
-permissions: read-all
+permissions: 
+  contents: write
 
 jobs:
   generate:
@@ -28,10 +29,3 @@ jobs:
           plugin_languages_indepth: true
           plugin_notable: true
           plugin_notable_repositories: true
-
-      - uses: EndBug/add-and-commit@v9
-        continue-on-error: true
-        with:
-          message: update Metrics
-          author_name: GitHub Actions
-          author_email: 41898282+github-actions[bot]@users.noreply.github.com
