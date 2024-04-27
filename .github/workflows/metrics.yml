@@ -2,7 +2,7 @@ name: Metrics Generator
 on:
   push:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 0 * * 0"
   workflow_dispatch:
 
 permissions: 
@@ -27,5 +27,3 @@ jobs:
           plugin_wakatime_token: ${{ secrets.WAKATIMETOKEN }}
           plugin_languages: true
           plugin_languages_indepth: true
-          plugin_notable: true
-          plugin_notable_repositories: true
